@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+.astro/
+dist/
+.next/
+.env*
+!.env.example

@@ -1,0 +1,19 @@
+---
+import { withBase } from '../../lib/urls';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Moggo.dev — Amogh Agarwal">
+  <h1>Moggo.dev</h1>
+  <p>
+    This is my personal website. It includes a short introduction, my
+    experience, and contact information.
+  </p>
+  <p>
+    Built with Astro, TypeScript, and CSS. The pages are static and work without
+    JavaScript.
+  </p>
+  <p>
+    <a href={withBase('/#projects')}>Back to projects</a>
+  </p>
+</Layout>

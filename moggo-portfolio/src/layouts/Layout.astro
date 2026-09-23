@@ -1,0 +1,111 @@
+---
+import { withBase } from '../lib/urls';
+import '../styles/global.css';
+import { profile } from '../data/portfolio';
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const {
+  title = 'Amogh Agarwal',
+  description = profile.description,
+  noindex = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Moggo.dev" />
+    <meta name="twitter:card" content="summary" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem('moggo-theme');
+        document.documentElement.dataset.theme =
+          saved === 'dark' || saved === 'light'
+            ? saved
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+      } catch {}
+    </script>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <nav class="container navigation" aria-label="Main navigation">
+        <a class="brand" href={withBase('/')}>
+          Moggo.dev
+        </a>
+        <div class="nav-links">
+          <a href={withBase('/#home')}>Home</a>
+          <a href={withBase('/#projects')}>Projects</a>
+          <a href={withBase('/#skills')}>Skills</a>
+          <a href={withBase('/#contact')}>Contact</a>
+        </div>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Switch to dark theme"
+          hidden
+        >
+          ◐
+        </button>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h2>Moggo.dev</h2>
+          <p>Building the web, one line at a time.</p>
+        </div>
+        <a href={profile.linkedin}>LinkedIn</a>
+        <p>
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
+      const update = () =>
+        toggle?.setAttribute(
+          'aria-label',
+          `Switch to ${document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'} theme`,
+        );
+      if (toggle) {
+        toggle.hidden = false;
+        update();
+        toggle.addEventListener('click', () => {
+          const theme =
+            document.documentElement.dataset.theme === 'dark'
+              ? 'light'
+              : 'dark';
+          document.documentElement.dataset.theme = theme;
+          try {
+            localStorage.setItem('moggo-theme', theme);
+          } catch {}
+          update();
+        });
+      }
+    </script>
+  </body>
+</html>

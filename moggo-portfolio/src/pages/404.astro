@@ -1,0 +1,12 @@
+---
+import { withBase } from '../lib/urls';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page not found — Amogh Agarwal" noindex>
+  <h1>Page not found</h1>
+  <p>The page you’re looking for doesn’t exist.</p>
+  <p>
+    <a href={withBase('/')}>Back to home</a>
+  </p>
+</Layout>

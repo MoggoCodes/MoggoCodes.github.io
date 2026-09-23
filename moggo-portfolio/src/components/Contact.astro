@@ -1,0 +1,23 @@
+---
+import { profile } from '../data/portfolio';
+---
+
+<section id="contact" class="section alternate">
+  <div class="container">
+    <h2>Get in Touch</h2>
+    <div class="card contact-card">
+      <p>Have a question or want to work together? Feel free to reach out.</p>
+      <a class="email-link" href={`mailto:${profile.email}`}>
+        {profile.email}
+      </a>
+      <div class="actions">
+        <a class="button primary" href={`mailto:${profile.email}`}>
+          Send an Email
+        </a>
+        <a class="button secondary" href={profile.linkedin}>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

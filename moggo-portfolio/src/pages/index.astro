@@ -1,0 +1,116 @@
+---
+import { withBase } from '../lib/urls';
+import Layout from '../layouts/Layout.astro';
+import Contact from '../components/Contact.astro';
+import { experience } from '../data/portfolio';
+const skills = [
+  { name: 'React', icon: '⚛️', level: 'Expert' },
+  { name: 'TypeScript', icon: '📘', level: 'Expert' },
+  { name: 'Astro', icon: '🚀', level: 'Web development' },
+  { name: 'Node.js', icon: '🟢', level: 'Advanced' },
+  { name: 'Python', icon: '🐍', level: 'Advanced' },
+  { name: 'AWS', icon: '☁️', level: 'Advanced' },
+];
+---
+
+<Layout>
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <div class="hero-copy">
+        <h1>Hi, I'm Moggo 👋</h1>
+        <p>
+          A passionate full-stack developer focused on building beautiful and
+          functional web applications.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#contact">
+            Get in Touch
+          </a>
+          <a class="button secondary" href="#projects">
+            View Projects
+          </a>
+        </div>
+      </div>
+      <img
+        class="profile"
+        src={withBase('/headshot.jpg')}
+        alt="Amogh Agarwal"
+        width="320"
+        height="320"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+  <section id="experience" class="section">
+    <div class="container">
+      <h2>Professional Experience</h2>
+      <div class="experience-list">
+        {experience.map((job) => (
+          <article class="experience-item">
+            <span class="timeline-dot" aria-hidden="true">
+              ▣
+            </span>
+            <div class="card">
+              <div class="job-heading">
+                <div>
+                  <h3>{job.role}</h3>
+                  <p class="company">{job.company}</p>
+                </div>
+                <p class="date">{job.period}</p>
+              </div>
+              <p class="job-description">{job.description}</p>
+              <div class="tags">
+                {job.tags.map((tag) => (
+                  <span>{tag}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section id="projects" class="section alternate">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="project-grid">
+        <article class="card project-card">
+          <div class="project-image" aria-hidden="true">
+            <span>Moggo.dev</span>
+            <small>Personal Portfolio</small>
+          </div>
+          <div class="project-body">
+            <h3>This Website</h3>
+            <p>
+              You’re looking at it! A personal portfolio website built with
+              Astro, TypeScript, and CSS.
+            </p>
+            <div class="tags">
+              <span>Astro</span>
+              <span>TypeScript</span>
+              <span>CSS</span>
+            </div>
+            <a href={withBase('/work/moggo-dev/')}>About this project →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section id="skills" class="section">
+    <div class="container">
+      <h2>Skills & Technologies</h2>
+      <div class="skills-grid">
+        {skills.map((skill) => (
+          <div class="card skill-card">
+            <span class="skill-icon" aria-hidden="true">
+              {skill.icon}
+            </span>
+            <h3>{skill.name}</h3>
+            <p>{skill.level}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Contact />
+</Layout>
