@@ -50,14 +50,14 @@ The email link opens the visitor’s email app. LinkedIn is a normal link. There
 - Output directory: `dist`
 - Node.js: 24
 
-The repository-root `.github/workflows/deploy.yml` builds this subdirectory and deploys to GitHub Pages on pushes to `main` or manual runs. GitHub Pages supplies the deployment origin and base path to the build, so assets, navigation, canonical URLs, robots, and the sitemap work at https://moggocodes.github.io/Moggo.dev/.
+The repository-root `.github/workflows/deploy.yml` builds this subdirectory and deploys to GitHub Pages on pushes to `main` or manual runs. GitHub Pages supplies the deployment origin and base path to the build, so assets, navigation, canonical URLs, robots, and the sitemap work at https://moggocodes.github.io/.
 
 For a custom domain, configure its DNS and add the domain in the repository’s Pages settings, then rerun the deployment workflow. The workflow automatically uses the new origin and base path. Local development still serves at `/`.
 
 To reproduce the GitHub Pages build locally:
 
 ```sh
-SITE_URL=https://moggocodes.github.io BASE_PATH=/Moggo.dev pnpm build
+SITE_URL=https://moggocodes.github.io BASE_PATH=/ pnpm build
 ```
 
 ## Design
