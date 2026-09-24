@@ -41,7 +41,7 @@ export const experience = [
     tags: ['Machine learning', 'Credit scoring', 'Data visualization'],
   },
   {
-    role: 'Predictive Modeler (basketball)',
+    role: 'Predictive Modeler (Basketball)',
     company: 'UF Athletic Association',
     period: 'May 2021 — May 2022',
     description:
