@@ -19,7 +19,7 @@ test('personal site is readable and navigable without JavaScript', async ({
   await expect(
     page.locator('#contact').getByRole('link', { name: 'LinkedIn' }),
   ).toHaveAttribute('href', 'https://www.linkedin.com/in/amogh-agarwal/');
-  await expect(page.locator('.experience-item')).toHaveCount(5);
+  await expect(page.locator('.experience-item')).toHaveCount(6);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
