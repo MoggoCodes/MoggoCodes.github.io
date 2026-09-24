@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { withBase } from '../lib/urls';
 import Layout from '../layouts/Layout.astro';
 import Contact from '../components/Contact.astro';
@@ -52,9 +53,27 @@ const skills = [
             </span>
             <div class="card">
               <div class="job-heading">
-                <div>
-                  <h3>{job.role}</h3>
-                  <p class="company">{job.company}</p>
+                <div class="job-identity">
+                  <span
+                    class:list={[
+                      'company-logo',
+                      `company-logo--${job.logoStyle}`,
+                    ]}
+                    aria-hidden="true"
+                  >
+                    <Image
+                      src={job.logo}
+                      alt=""
+                      widths={[160, 320]}
+                      sizes="160px"
+                      width={320}
+                      loading="lazy"
+                    />
+                  </span>
+                  <div class="job-title">
+                    <h3>{job.role}</h3>
+                    <p class="company">{job.company}</p>
+                  </div>
                 </div>
                 <p class="date">{job.period}</p>
               </div>

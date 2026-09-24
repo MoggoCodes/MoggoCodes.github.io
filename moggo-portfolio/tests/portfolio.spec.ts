@@ -20,11 +20,24 @@ test('personal site is readable and navigable without JavaScript', async ({
     page.locator('#contact').getByRole('link', { name: 'LinkedIn' }),
   ).toHaveAttribute('href', 'https://www.linkedin.com/in/amogh-agarwal/');
   await expect(page.locator('.experience-item')).toHaveCount(6);
+  const logos = page.locator('.company-logo img');
+  await expect(logos).toHaveCount(6);
+  for (const logo of await logos.all()) {
+    await logo.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        logo.evaluate(
+          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+  }
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
     ),
   ).toBe(true);
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   await page.screenshot({
     path: testInfo.outputPath('home.png'),
     fullPage: true,
